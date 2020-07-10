@@ -1,5 +1,3 @@
 ---
-# vars file for dockerengine
-- name: Incluyendo variables para dependencias
   include_vars:
     file: dependencies.yaml

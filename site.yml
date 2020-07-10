@@ -1,0 +1,9 @@
+---
+#-
+    #name: Automatisacion Despliege de Maquinas Virtuales en Hyper V
+    #hosts: localhost
+    #connection: local
+    #gather_facts: False 
+    #tasks:
+
+- import_playbook: dockerservers.yml

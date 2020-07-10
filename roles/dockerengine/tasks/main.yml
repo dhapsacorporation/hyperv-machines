@@ -1,0 +1,15 @@
+---
+# tasks file for dockerengine
+    - name: Incluir variables para la instalacion de dependencias
+      include_vars:
+        file: vars/dependencies.yaml
+        name: dependencies
+
+    - name: Instalacion de dependencias para docker engine
+      apt:
+        name: "{item}"
+        state: present
+      loop: dependencias
+        
+
+
