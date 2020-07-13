@@ -1,6 +1,4 @@
-casper ansible_host=192.168.1.146 ansible_connection=ssh ansible_ssh_private_key_file=~/.ssh/casper
-
-
+casper ansible_host=192.168.1.146 ansible_connection=ssh ansible_ssh_private_key_file=~/.ssh/casper ansible_python_interpreter=/usr/bin/python3
 
 
 [docker_swarm_manager]
