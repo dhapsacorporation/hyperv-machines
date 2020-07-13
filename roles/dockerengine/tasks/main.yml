@@ -3,13 +3,47 @@
     - name: Incluir variables para la instalacion de dependencias
       include_vars:
         file: vars/dependencies.yaml
-        name: dependencies
-
-    - name: Instalacion de dependencias para docker engine
-      apt:
-        name: "{item}"
-        state: present
-      loop: dependencias
         
+    - name: Configuracion de dependencia  para docker engine
+      apt:
+        name: '{{item.name}}'
+        state: '{{item.state}}'
+      register: dependencia_stdout
+      with_items: '{{dependencias}}'
 
+    - name: Agregamos la llave GPG para disponer el repositorio Docker
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+        state: present
+      become: yes 
+    
+    - name: Agregamos el repositorio al Source Repo 
+      apt_repository:
+       repo: deb [arch=amd64] https://download.docker.com/linux/debian stretch stable 
+       state: present
+      become: yes
 
+    - name: Actualisar repositorios e instalar Docker Engine packages
+      apt:
+        name: '{{item.name}}'
+        update_cache: yes
+      with_items: '{{docker_engine_packages}}'
+      become: yes
+    
+    - name: Probando Containers
+      docker_container:
+        name: container_proof
+        image: debian
+        state: present
+        env:
+          H: echo $(HOSTNAME)
+        command: echo $H
+      become: yes
+      
+    #- name: Agregar la firma al repositorio de docker
+     # apt_key:
+      #  url: https://download.docker.com/linux/ubuntu/gpg
+
+#    - name: Incluir Instalacion de Dependencias
+ #     include_tasks: installengine.yaml
+     
