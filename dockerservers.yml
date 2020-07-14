@@ -1,0 +1,8 @@
+-
+    name: Instalacion de Docker Engine en Nodos Correspondientes  
+    hosts: docker_engine
+    connection: ssh
+    gather_facts: False
+    roles:
+        - dockerengine
+    
