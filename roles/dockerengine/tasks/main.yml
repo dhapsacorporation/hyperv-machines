@@ -36,10 +36,13 @@
         image: debian
         state: present
         env:
-          H: echo $(HOSTNAME)
+          H: $(HOSTNAME)
         command: echo $H
+      register: docker
       become: yes
       
+    - debug:
+        var: docker
     #- name: Agregar la firma al repositorio de docker
      # apt_key:
       #  url: https://download.docker.com/linux/ubuntu/gpg
