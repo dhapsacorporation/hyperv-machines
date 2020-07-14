@@ -1,0 +1,2 @@
+[docker_engine]
+digital_ocean_deb ansible_host=157.245.251.194 ansible_session=ssh ansible_python_interpreter=/usr/bin/python3
