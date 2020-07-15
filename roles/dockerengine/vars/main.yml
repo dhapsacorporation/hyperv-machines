@@ -1,3 +1,3 @@
 ---
-  include_vars:
-    file: dependencies.yaml
+include_vars:
+  file: vars/dependencies.yaml
