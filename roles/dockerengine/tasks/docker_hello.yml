@@ -1,13 +1,12 @@
 ---
 - name: Probando Containers
   docker_container:
-    name: container_proof
+    name: container_prueba
+    hostname: container_debian_prueba
     image: debian
     state: present
-    env:
-        h: $HOST
-    command: echo $h
+    command: Hola mundo desde Docker
   register: docker
 
 - debug:
-    var: docker.state.status
+     msg: 'EJECUCION DE DOCKER -----> {{docker.ansible_facts.docker_container.Config.Cmd}}' 
