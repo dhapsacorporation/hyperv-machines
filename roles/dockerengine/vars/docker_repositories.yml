@@ -1,0 +1,5 @@
+ debian_repos: 
+     gpg: https://download.docker.com/linux/debian/gpg
+     r: deb [arch=amd64] https://download.docker.com/linux/debian 
+ redhat_repo:
+     r: https://download.docker.com/linux/centos/docker-ce.repo 
