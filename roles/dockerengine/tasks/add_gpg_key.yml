@@ -1,11 +1,18 @@
 ---
-- name: Agregamos la llave GPG para disponer el repositorio Docker
-  apt_key:
-    url: https://download.docker.com/linux/debian/gpg
-    state: present
-  become: yes 
+- include_vars:
+     file: vars/docker_repositories.yml
 
-- name: Agregamos el repositorio al Source Repo 
-  apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/debian stretch stable 
+- name: Agregamos la llave GPG a OS DEBIAN para disponer el repositorio Docker
+  apt_key:
+    url: '{{debian_repos.gpg}}'
     state: present
+  become: yes
+  when: ansible_facts['os_family'] == "Debian" 
+
+
+
+- name: Agregamos el repositorio A OS DEBIAN al Source list 
+  apt_repository:
+    repo: "{{debian_repos.r}} {{ansible_facts['lsb'].codename}} stable"   
+    state: present
+  when: ansible_facts['os_family'] == "Debian" 
